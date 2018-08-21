@@ -1,9 +1,17 @@
-{% if artist_list %}
-  <u>
-  {% for artist in artist_list %}
-  <li><a href="{% url 'resume:artist_detail' artist.id %}">{{ artist }}</a></li>
-  {% endfor %}
-  </ul>
-{% else %}
-  <p>No artists available</p>
-{% endif %}
+{% extends "base.html" %}
+
+{% block main %}
+  <!-- navigation -->
+  {% include "includes/navbar.html" %}
+
+  {% if artist_list %}
+    <h3>Artists</h3>
+    <ul>
+    {% for artist in artist_list %}
+    <li><a href="{% url 'resume:artist_detail' artist.id %}">{{ artist }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No artists available</p>
+    {% endif %}
+{% endblock main %}

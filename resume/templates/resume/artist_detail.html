@@ -1,8 +1,19 @@
+<h3>Menu</h3>
+<ul>
+  <li><a href="{% url 'resume:artists' %}">Home</a></li>
+</ul>
+
 <h2>{{ artist.first_name }} {{ artist.last_name }}</h2>
 
 <ul>
   <li>Stage name: {{ artist.stage_name }}</li>
   <li>Email: {{ artist.email }}</li>
-  <li>Telephone number: {{ artist.telephone_number }}</li>
-  <li>Biography: {{ artist.biography }}</li>
+
+  {% if artist.telephone_number %}
+    <li>Telephone number: {{ artist.telephone_number }}</li>
+  {% endif %}
+
+  {% if artist.biography %}
+    <li>Biography: {{ artist.biography }}</li>
+  {% endif %}
 </ul>
