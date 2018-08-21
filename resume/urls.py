@@ -6,6 +6,6 @@ from . import views
 
 app_name = 'resume'
 urlpatterns = [
-    path('', views.artists, name='artists'),
-    path('artist/<uuid:artist_id>/', views.artist_detail, name='artist_detail'),
+    path('', views.IndexView.as_view(), name='artists'),
+    path('artist/<uuid:artist_id>/', views.DetailView.as_view(), name='artist_detail'),
 ]
