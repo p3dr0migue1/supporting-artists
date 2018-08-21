@@ -4,7 +4,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 # app imports
-from .models import Artist, Language
+from .models import Artist, Language, Skill
 from .views import IndexView, DetailView
 
 
@@ -63,3 +63,9 @@ class TestViews(TestCase):
         language = Language(name='pt')
 
         self.assertEqual(language.__repr__(), expected_result)
+
+    def test_skil_model_representation(self):
+        expected_result = '<Skill: Horse riding>'
+        skill = Skill(name='Horse riding')
+
+        self.assertEqual(skill.__repr__(), expected_result)
