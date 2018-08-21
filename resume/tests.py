@@ -4,7 +4,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
 # app imports
-from .models import Artist
+from .models import Artist, Language
 from .views import IndexView, DetailView
 
 
@@ -48,3 +48,18 @@ class TestViews(TestCase):
 
         # self.assertEqual(response.context_data['artist'], artist)
         self.assertEqual(response.status_code, 200)
+
+    def test_artist_model_representation(self):
+        expected_result = '<Artist: Pedro Curado - pedro@mail.com>'
+        artist = Artist(
+            first_name='Pedro',
+            last_name='Curado',
+            email='pedro@mail.com',
+        )
+        self.assertEqual(artist.__repr__(), expected_result)
+
+    def test_language_model_representation(self):
+        expected_result = '<Language: pt>'
+        language = Language(name='pt')
+
+        self.assertEqual(language.__repr__(), expected_result)
