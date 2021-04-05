@@ -1,0 +1,9 @@
+{% if artist_list %}
+  <u>
+  {% for artist in artist_list %}
+  <li><a href="#">{{ artist }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No artists available</p>
+{% endif %}
