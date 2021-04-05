@@ -1,5 +1,17 @@
 import uuid
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+
+LANGUAGES = [
+    ('en', _(u'English')),
+    ('fr', _(u'French')),
+    ('ga', _(u'Irish')),
+    ('de', _(u'German')),
+    ('it', _(u'Italian')),
+    ('pl', _(u'Polish')),
+    ('pt', _(u'Portuguese')),
+]
 
 
 class Artist(models.Model):
@@ -15,3 +27,19 @@ class Artist(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} - {self.email}'
+
+
+class Language(models.Model):
+    artist = models.ManyToManyField('Artist', related_name='language', blank=True, null=True)
+    name = models.CharField(max_length=7, choices=LANGUAGES)
+
+    def __str__(self):
+        return self.name
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+    artist = models.ForeignKey('Artist', blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
