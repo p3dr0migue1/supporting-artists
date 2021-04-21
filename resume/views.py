@@ -1,16 +1,19 @@
 from django.shortcuts import get_object_or_404, render
+from django.views import generic
+from django.views.generic.edit import CreateView
 
+# app imports
 from .models import Artist
 
 
-def artists(request):
-    artist_list = Artist.objects.order_by('-date_created')[:3]
-    context = {
-        'artist_list': artist_list,
-    }
-    return render(request, 'resume/artists.html', context)
+class IndexView(generic.ListView):
+    template_name = 'resume/artists.html'
+    context_object_name = 'artist_list'
+
+    def get_queryset(self):
+        return Artist.objects.order_by('-date_created')[:3]
 
 
-def artist_detail(request, artist_id):
-    artist = get_object_or_404(Artist, pk=artist_id)
-    return render(request, 'resume/artist_detail.html', {'artist': artist})
+class ArtistCreate(CreateView):
+    model = Artist
+    fields = ['first_name', 'last_name', 'email']
