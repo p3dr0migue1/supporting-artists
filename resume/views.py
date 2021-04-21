@@ -17,3 +17,11 @@ class IndexView(generic.ListView):
 class ArtistCreate(CreateView):
     model = Artist
     fields = ['first_name', 'last_name', 'email']
+
+
+class DetailView(generic.DetailView):
+    model = Artist
+    template_name = 'resume/artist_detail.html'
+
+    def get_object(self, queryset=None):
+        return Artist.objects.get(id=self.kwargs.get('artist_id'))
