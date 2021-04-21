@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -24,6 +25,9 @@ class Artist(models.Model):
     last_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     telephone_number = models.CharField(max_length=11, blank=True)  # (optional)
     biography = models.TextField(blank=True)  # (optional)
+
+    def get_absolute_url(self):
+        return reverse('resume:artist_detail', kwargs={'artist_id': self.id})
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} - {self.email}'
